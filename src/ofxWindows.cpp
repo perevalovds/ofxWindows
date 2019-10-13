@@ -85,13 +85,15 @@ void ofxWindows::MouseExec(int screen_x, int screen_y, bool leftClick, bool righ
 
 //--------------------------------------------------------------
 bool ofxWindows::SendKeyboardByWindowClass(string window_class, int key) {
+	
 	//https://stackoverflow.com/questions/2113950/how-to-send-keystrokes-to-a-window
 	//https://batchloaf.wordpress.com/2012/04/17/simulating-a-keystroke-in-win32-c-or-c-using-sendinput/
+	//https://stackoverflow.com/questions/11438110/sendinput-for-keyboard-only-lowercase
+
 
 	HWND window_handle;
-	//window_class = "UnrealWindow";
 
-	//To search windows class use WinLister in 'windows' addon's folder
+	//To search windows class use 'utilities/winlister' in addon's folder
 
 	//Get the handle of the Notepad window.
 	window_handle = FindWindowA(window_class.c_str(), NULL);
@@ -110,19 +112,22 @@ bool ofxWindows::SendKeyboardByWindowClass(string window_class, int key) {
 	//Fill in the array of keystrokes to send.
 	UINT keystrokes_to_send = 2;
 	INPUT keystroke[2];
-	//UINT i, character_count, keystrokes_to_send, keystrokes_sent;
+
+	const SHORT key1 = VkKeyScan(key);
+	const UINT mappedKey1 = MapVirtualKey(LOBYTE(key1), 0);
+
 
 	keystroke[0].type = INPUT_KEYBOARD;
-	keystroke[0].ki.wVk = 0;
-	keystroke[0].ki.wScan = key;
-	keystroke[0].ki.dwFlags = KEYEVENTF_UNICODE;
+	//keystroke[0].ki.wVk = 0;
+	keystroke[0].ki.wScan = mappedKey1; //key;
+	keystroke[0].ki.dwFlags = KEYEVENTF_SCANCODE; //KEYEVENTF_UNICODE;
 	keystroke[0].ki.time = 0;
 	keystroke[0].ki.dwExtraInfo = GetMessageExtraInfo();
 
 	keystroke[1].type = INPUT_KEYBOARD;
-	keystroke[1].ki.wVk = 0;
-	keystroke[1].ki.wScan = key;
-	keystroke[1].ki.dwFlags = KEYEVENTF_UNICODE | KEYEVENTF_KEYUP;
+	//keystroke[1].ki.wVk = 0;
+	keystroke[1].ki.wScan = mappedKey1;  //key;
+	keystroke[1].ki.dwFlags = KEYEVENTF_SCANCODE | KEYEVENTF_KEYUP; //KEYEVENTF_UNICODE | KEYEVENTF_KEYUP;
 	keystroke[1].ki.time = 0;
 	keystroke[1].ki.dwExtraInfo = GetMessageExtraInfo();
 

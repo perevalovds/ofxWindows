@@ -33,6 +33,7 @@ struct ofxWindows {
 
 	//Send keyboard to a window with given class name
 	//To search windows class use WinLister in 'windows/winlister' folder of the addon
+	//Note: the window which receives the keyboard press is making active (to be able to receive keypresses)
 	static bool SendKeyboardByWindowClass(string window_class, int key);
 };
 
