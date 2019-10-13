@@ -19,7 +19,7 @@ void ofApp::draw(){
 		time_ = time;
 		string window_class = "Notepad";
 		char c = k + '0';
-		bool result = ofxWindows::SendKeyboardByWindowClass("Notepad", c);
+		bool result = ofxWindows::SendKeyboardByWindowClass(window_class, c);
 		if (result) {
 			cout << "Sent " << c << " to " << window_class << endl;
 		}
