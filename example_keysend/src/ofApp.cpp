@@ -24,7 +24,7 @@ void ofApp::draw(){
 			cout << "Sent " << c << " to " << window_class << endl;
 		}
 		else {
-			cout << "Can't sent symbol, may be window with class " << window_class << " isn't exists"<< endl;
+			cout << "Can't sent symbol, may be window with class " << window_class << " doesn't exists"<< endl;
 			cout << "To check this, run unitilies/winlister" << endl;
 		}
 		k = (k+1) % 10;
