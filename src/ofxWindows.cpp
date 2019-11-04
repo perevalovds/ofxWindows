@@ -62,7 +62,7 @@ void ofxWindows::MouseExec(int screen_x, int screen_y, bool leftClick, bool righ
 	memset(inp, 0, sizeof(inp));
 
 	inp[0].type = INPUT_MOUSE;
-	inp[0].mi.dwFlags = MOUSEEVENTF_MOVE | MOUSEEVENTF_ABSOLUTE; // движение мышки
+	inp[0].mi.dwFlags = MOUSEEVENTF_MOVE | MOUSEEVENTF_ABSOLUTE; // движение мышк?
 	inp[0].mi.dx = x;
 	inp[0].mi.dy = y;
 
@@ -139,6 +139,40 @@ bool ofxWindows::SendKeyboardByWindowClass(string window_class, int key) {
 
 }
 
+bool ofxWindows::showWindow(string window_class)
+{
+	HWND window_handle;
+
+	//To search windows class use 'utilities/winlister' in addon's folder
+
+	//Get the handle of the Notepad window.
+	window_handle = FindWindowA(window_class.c_str(), NULL);
+	if (window_handle == NULL) {
+		return false;
+	}
+
+	ShowWindow(window_handle, SW_SHOW);
+
+	return true;
+}
+
+bool ofxWindows::hideWindow(string window_class)
+{
+	HWND window_handle;
+
+	//To search windows class use 'utilities/winlister' in addon's folder
+
+	//Get the handle of the Notepad window.
+	window_handle = FindWindowA(window_class.c_str(), NULL);
+	if (window_handle == NULL) {
+		return false;
+	}
+
+	ShowWindow(window_handle, SW_HIDE);
+
+	return true;
+}
+
 //--------------------------------------------------------------
 //Screen grabber
 
@@ -160,7 +194,7 @@ int CaptureBMP(int grabX, int grabY, int grabW, int grabH, unsigned char *outDat
 	// memory DC keeps a copy of this "snapshot" in the associated
 	// bitmap.
 	if (!hdcScr) {
-		hdcScr = CreateDC(_T("DISPLAY"), NULL, NULL, NULL);		//как вариант - CreateCompatibleDC(0);
+		hdcScr = CreateDC(_T("DISPLAY"), NULL, NULL, NULL);		//ка?вариан?- CreateCompatibleDC(0);
 		hdcMem = CreateCompatibleDC(hdcScr);
 	}
 
@@ -168,7 +202,7 @@ int CaptureBMP(int grabX, int grabY, int grabW, int grabH, unsigned char *outDat
 	//iYRes = GetDeviceCaps(hdcScr, VERTRES);
 
 	// Create a compatible bitmap for hdcScreen.
-	if (hbmScr == 0) {							//! если сменилс¤ размер, то надо пересоздать
+	if (hbmScr == 0) {							//! если сменилс¤ размер, то надо пересоздат?
 		hbmScr = CreateCompatibleBitmap(hdcScr, grabW, grabH);
 	}
 	if (hbmScr == 0) {
@@ -252,14 +286,14 @@ int CaptureBMP(int grabX, int grabY, int grabW, int grabH, unsigned char *outDat
 	// device colors are important.
 	pbmi->bmiHeader.biClrImportant = 0;
 
-	HANDLE hf;                  // file handle
-	BITMAPFILEHEADER hdr;       // bitmap file-header
+//	HANDLE hf;                  // file handle
+//	BITMAPFILEHEADER hdr;       // bitmap file-header
 	PBITMAPINFOHEADER pbih;     // bitmap info-header
 	LPBYTE lpBits;              // memory pointer
-	DWORD dwTotal;              // total count of bytes
-	DWORD cb;                   // incremental count of bytes
-	BYTE *hp;                   // byte pointer
-	DWORD dwTmp;
+//	DWORD dwTotal;              // total count of bytes
+//	DWORD cb;                   // incremental count of bytes
+//	BYTE *hp;                   // byte pointer
+//	DWORD dwTmp;
 
 	pbih = (PBITMAPINFOHEADER)pbmi;
 
@@ -296,12 +330,12 @@ bool ofxWindowsScreenGrabber::grab(int x, int y, int w, int h) {
 		pixels.allocate(w, h, 4);
 	}
 
-	int res = CaptureBMP(x, y, w, h, pixels.getPixels());
+	int res = CaptureBMP(x, y, w, h, pixels.getData());
 
 	if (res) {
 		
 		//flip y & R<->B
-		unsigned char *data = pixels.getPixels();
+		unsigned char *data = pixels.getData();
 		for (int y = 0; y < h/2; y++) {
 			for (int x = 0; x < w; x++) {
 				int i = 4 * (x + w * y);
