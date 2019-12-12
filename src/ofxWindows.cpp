@@ -174,6 +174,14 @@ bool ofxWindows::hideWindow(string window_class)
 }
 
 //--------------------------------------------------------------
+void ofxWindows::set_foreground_window() {
+	//https://forum.openframeworks.cc/t/set-foreground-window/2354
+	HWND wnd = WindowFromDC(wglGetCurrentDC());
+	SetForegroundWindow(wnd);
+	SetActiveWindow(wnd);
+}
+
+//--------------------------------------------------------------
 //Screen grabber
 
 HDC hdcScr = 0;

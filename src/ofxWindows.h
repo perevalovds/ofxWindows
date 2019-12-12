@@ -36,8 +36,13 @@ struct ofxWindows {
 	//Note: the window which receives the keyboard press is making active (to be able to receive keypresses)
 	static bool SendKeyboardByWindowClass(string window_class, int key);
 
+	//Show/hide window given by window_class
+	//To looking for current runned windows classes names run 'utilities/winlister' in addon's folder
 	static bool showWindow(string window_class);
 	static bool hideWindow(string window_class);
+
+	//Set current window as forground
+	static void set_foreground_window();
 };
 
 
