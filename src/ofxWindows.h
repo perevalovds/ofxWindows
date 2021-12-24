@@ -12,11 +12,11 @@
 struct ofxWindows {
 	//Functions for borderless fullscreen emulation
 
-	//Make current oF window borderless
+	//Make current oF window borderless - call it before setting window position and size.
 	static void SetMainWindowBorderless();
 
 	//Restore current oF window border
-	//NOTE: currently it works bad in oF, because y-coord of mouse is shifted
+	//NOTE: currently it works bad in oF, because as a result y-coord of mouse is shifted
 	static void RestoreMainWindowBorder();
 
 	//Set size and position of the current oF window
