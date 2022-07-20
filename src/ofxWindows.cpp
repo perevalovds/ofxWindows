@@ -182,6 +182,44 @@ void ofxWindows::set_foreground_window() {
 }
 
 //--------------------------------------------------------------
+// Capture raw keyboard state (for synths, games)
+/*
+From Microsoft GDK docs:
+Standard keyboards can only report four to six key presses at a time,
+and even high-end gaming keyboards rarely support more than 12-16 keys at once.
+
+Get keyboard state:
+https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getkeyboardstate
+
+BOOL GetKeyboardState(
+  [out] PBYTE lpKeyState
+);
+The 256-byte array that receives the status data for each virtual key.
+
+To retrieve status information for an individual key, use the GetKeyState function.
+To retrieve the current state for an individual key regardless of whether the corresponding
+keyboard message has been retrieved from the message queue, use the GetAsyncKeyState function.
+
+GetAsyncKeyState
+https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-getasynckeystate
+Virtual key codes:
+https://docs.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
+
+Example usage :
+	cout << "space " << ofxWindows::capture_key_state(VK_SPACE)
+	<< ", left " << ofxWindows::capture_key_state(VK_LEFT)
+	<< ", A " << ofxWindows::capture_key_state(0x41)
+	<< ", S " << ofxWindows::capture_key_state(0x53)
+	<< endl;
+
+To achieve lower latency, we should pull it in a separate thread.
+*/
+
+short ofxWindows::capture_key_state(int windowsVirtualKey) {
+	return GetAsyncKeyState(windowsVirtualKey);
+}
+
+//--------------------------------------------------------------
 //Screen grabber
 
 HDC hdcScr = 0;

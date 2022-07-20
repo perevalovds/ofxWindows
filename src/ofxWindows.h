@@ -5,7 +5,8 @@
 //- console window(hide, show),
 //- mouse move and click emulation
 //- sending keyboard hit to a window, found by window class name(see windows / winlister for getting window class).
-//- screen grabber (GDI method)
+//- capture raw keyboard state (for synths, games)
+//- screen grabber (GDI method) ofxWindowsScreenGrabber
 
 #include "ofMain.h"
 
@@ -41,8 +42,12 @@ struct ofxWindows {
 	static bool showWindow(string window_class);
 	static bool hideWindow(string window_class);
 
-	//Set current window as forground
+	//Set current window to foreground
 	static void set_foreground_window();
+
+	// Capture raw keyboard state(for synths, games)
+	// See implementation for details
+	static short capture_key_state(int windowsVirtualKey);
 };
 
 
