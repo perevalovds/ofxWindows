@@ -210,6 +210,29 @@ short ofxWindows::capture_key_state(int windowsVirtualKey) {
 }
 
 //--------------------------------------------------------------
+int ofxWindows::DialogOkCancel(const string& title, const string& text) {
+	HWND hw = WindowFromDC(wglGetCurrentDC());
+	int dlg = MessageBoxA(hw, text.c_str(), title.c_str(), MB_OKCANCEL | MB_ICONQUESTION);
+
+	if (dlg == IDOK) return 1;
+	if (dlg == IDCANCEL) return 0;
+	return 0;
+}
+
+//--------------------------------------------------------------
+// Dialog "Yes/No/Cancel"
+int ofxWindows::DialogYesNoCancel(const string& title, const string& text) {
+	HWND hw = WindowFromDC(wglGetCurrentDC());
+	int dlg = MessageBoxA(hw, text.c_str(), title.c_str(), MB_YESNOCANCEL | MB_ICONQUESTION);
+	
+	if (dlg == IDYES) return 1;
+	if (dlg == IDNO) return 2;
+	if (dlg == IDCANCEL) return 0;
+	return 0;
+}
+
+
+//--------------------------------------------------------------
 //Screen grabber
 
 HDC hdcScr = 0;

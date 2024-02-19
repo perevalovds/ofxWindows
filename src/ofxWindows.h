@@ -48,6 +48,12 @@ struct ofxWindows {
 	// Capture raw keyboard state(for synths, games)
 	// See implementation for details
 	static short capture_key_state(int windowsVirtualKey);
+
+	// Dialog "Ok/Cancel", 1 - ok, 0 - cancel
+	static int DialogOkCancel(const string& title, const string& text);
+
+	// Dialog "Yes/No/Cancel", 1 - yes, 2 - no, 0 - cancel
+	static int DialogYesNoCancel(const string& title, const string& text);
 };
 
 
