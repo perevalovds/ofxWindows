@@ -214,23 +214,31 @@ int ofxWindows::DialogOkCancel(const string& title, const string& text) {
 	HWND hw = WindowFromDC(wglGetCurrentDC());
 	int dlg = MessageBoxA(hw, text.c_str(), title.c_str(), MB_OKCANCEL | MB_ICONQUESTION);
 
-	if (dlg == IDOK) return 1;
-	if (dlg == IDCANCEL) return 0;
+	if (dlg == IDOK) return DlgOk;
+	if (dlg == IDCANCEL) return DlgCancel;
 	return 0;
 }
 
 //--------------------------------------------------------------
-// Dialog "Yes/No/Cancel"
 int ofxWindows::DialogYesNoCancel(const string& title, const string& text) {
 	HWND hw = WindowFromDC(wglGetCurrentDC());
 	int dlg = MessageBoxA(hw, text.c_str(), title.c_str(), MB_YESNOCANCEL | MB_ICONQUESTION);
 	
-	if (dlg == IDYES) return 1;
-	if (dlg == IDNO) return 2;
-	if (dlg == IDCANCEL) return 0;
+	if (dlg == IDYES) return DlgYes;
+	if (dlg == IDNO) return DlgNo;
+	if (dlg == IDCANCEL) return DlgCancel;
 	return 0;
 }
 
+//--------------------------------------------------------------
+int ofxWindows::DialogYesNo(const string& title, const string& text) {
+	HWND hw = WindowFromDC(wglGetCurrentDC());
+	int dlg = MessageBoxA(hw, text.c_str(), title.c_str(), MB_YESNO | MB_ICONQUESTION);
+
+	if (dlg == IDYES) return DlgYes;
+	if (dlg == IDNO) return DlgNo;
+	return 0;
+}
 
 //--------------------------------------------------------------
 //Screen grabber

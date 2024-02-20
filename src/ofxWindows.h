@@ -49,11 +49,19 @@ struct ofxWindows {
 	// See implementation for details
 	static short capture_key_state(int windowsVirtualKey);
 
-	// Dialog "Ok/Cancel", 1 - ok, 0 - cancel
+	static const int DlgCancel = 0;
+	static const int DlgOk = 1;
+	static const int DlgYes = 1;
+	static const int DlgNo = 2;
+
+	// Dialog "Ok/Cancel", DlgOk - ok, DlgCancel - cancel
 	static int DialogOkCancel(const string& title, const string& text);
 
-	// Dialog "Yes/No/Cancel", 1 - yes, 2 - no, 0 - cancel
+	// Dialog "Yes/No/Cancel", DlgYes - yes, DlgNo - no, DlgCancel - cancel
 	static int DialogYesNoCancel(const string& title, const string& text);
+
+	// Dialog "Yes/No", DlgYes - yes, DlgNo - no
+	static int DialogYesNo(const string& title, const string& text);
 };
 
 
