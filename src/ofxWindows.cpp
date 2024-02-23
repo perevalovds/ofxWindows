@@ -39,6 +39,12 @@ void ofxWindows::SetMainWindowPositionSize(int x, int y, int w, int h) {
 }
 
 //--------------------------------------------------------------
+void ofxWindows::CloseMainWindow() {
+	HWND hw = WindowFromDC(wglGetCurrentDC());
+	PostMessage(hw, WM_QUIT, 0, 0);
+}
+
+//--------------------------------------------------------------
 //Show and hide console window
 void ofxWindows::ShowConsole() {
 	ShowWindow(GetConsoleWindow(), SW_SHOW);

@@ -24,6 +24,9 @@ struct ofxWindows {
 	//(works more stable that oF implementation
 	static void SetMainWindowPositionSize(int x, int y, int w, int h);
 
+	// Close window
+	static void CloseMainWindow();
+
 
 	//Show and hide console window
 	static void ShowConsole();
@@ -41,7 +44,7 @@ struct ofxWindows {
 	//To looking for current runned windows classes names run 'utilities/winlister' in addon's folder
 	static bool showWindow(string window_class);
 	static bool hideWindow(string window_class);
-
+	
 	//Set current window to foreground
 	static void set_foreground_window();
 
