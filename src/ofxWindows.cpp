@@ -39,6 +39,13 @@ void ofxWindows::SetMainWindowPositionSize(int x, int y, int w, int h) {
 }
 
 //--------------------------------------------------------------
+void ofxWindows::MinimizeMainWindowAndConsole() {
+	HWND hw = WindowFromDC(wglGetCurrentDC());
+	ShowWindow(hw, SW_MINIMIZE);
+	ShowWindow(GetConsoleWindow(), SW_MINIMIZE);
+}
+
+//--------------------------------------------------------------
 void ofxWindows::CloseMainWindow() {
 	HWND hw = WindowFromDC(wglGetCurrentDC());
 	PostMessage(hw, WM_QUIT, 0, 0);
@@ -180,11 +187,16 @@ bool ofxWindows::hideWindow(string window_class)
 }
 
 //--------------------------------------------------------------
-void ofxWindows::set_foreground_window() {
+void ofxWindows::SetMainWindowForeground() {
 	//https://forum.openframeworks.cc/t/set-foreground-window/2354
 	HWND wnd = WindowFromDC(wglGetCurrentDC());
 	SetForegroundWindow(wnd);
 	SetActiveWindow(wnd);
+}
+
+//--------------------------------------------------------------
+void ofxWindows::set_foreground_window() {
+	SetMainWindowForeground();
 }
 
 //--------------------------------------------------------------

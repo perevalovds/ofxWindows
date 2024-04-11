@@ -24,6 +24,12 @@ struct ofxWindows {
 	//(works more stable that oF implementation
 	static void SetMainWindowPositionSize(int x, int y, int w, int h);
 
+	//Set current window to foreground
+	static void SetMainWindowForeground();
+	static void set_foreground_window();	// DEPRECATED, calls SetMainWindowForeground()
+
+	static void MinimizeMainWindowAndConsole();
+
 	// Close window
 	static void CloseMainWindow();
 
@@ -45,9 +51,6 @@ struct ofxWindows {
 	static bool showWindow(string window_class);
 	static bool hideWindow(string window_class);
 	
-	//Set current window to foreground
-	static void set_foreground_window();
-
 	// Capture raw keyboard state(for synths, games)
 	// See implementation for details
 	static short capture_key_state(int windowsVirtualKey);
